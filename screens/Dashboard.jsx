@@ -4,9 +4,20 @@ import Home from '../tabs/Home'
 import Account from '../tabs/Account'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import IonIcons from 'react-native-vector-icons/Ionicons'
+import { useOrder } from '../context/OrderContext'
+import { useNavigation } from '@react-navigation/native'
+import { useEffect } from 'react'
 const Tab = createBottomTabNavigator()
 
 const Dashboard = () => {
+    const navigation = useNavigation()
+    const { newOrder, } = useOrder();
+
+    useEffect(() => {
+        if (newOrder) {
+            navigation.navigate('order-request'); // Navigate to the popup screen if there's a new order
+        }
+    }, [newOrder]);
     return (
         <Tab.Navigator
             screenOptions={{
