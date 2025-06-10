@@ -3,13 +3,23 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
 import { useNavigation } from '@react-navigation/native'
 import RadioButton from 'react-native-radio-button'
 import { useState } from 'react'
+import { Screen } from 'react-native-screens'
+import { useDispatch } from 'react-redux'
+import { setisAuthenticated } from '../redux/authSlice'
+import Header from '../components/common/Header'
 
 const OrderDeliveryType = () => {
     const [orderTypePref, setOrderTypePref] = useState(null)
     const navigation = useNavigation()
+const dispatch = useDispatch()
+const handleNavigation = () => {
+   dispatch(setisAuthenticated(true))
+    navigation.navigate('dashboard', { screen: 'home' })
+}
+
     return (
         <View style={styles.container}>
-            <Header />
+           <Header title={"Select the orders you would like to deliver"} showicon={true}/>
             <View>
                 <Text
                     style={{
@@ -41,7 +51,7 @@ const OrderDeliveryType = () => {
                 />
 
             </View>
-            <TouchableOpacity onPress={() => navigation.navigate("vehicle-selection")} style={{ marginTop: "15%", width: "90%", height: 64, marginHorizontal: "auto", backgroundColor: "#FA4A0C", padding: 10, borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <TouchableOpacity onPress={handleNavigation} style={{ marginTop: "15%", width: "90%", height: 64, marginHorizontal: "auto", backgroundColor: "#FA4A0C", padding: 10, borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <Text style={{ color: "#fff", fontSize: 24, fontFamily: "OpenSans-Regular" }}>Continue</Text>
             </TouchableOpacity>
         </View>
@@ -57,19 +67,7 @@ const styles = StyleSheet.create({
     }
 })
 
-const Header = () => {
-    const navigation = useNavigation()
-    return (
-        <View style={{ backgroundColor: "#202020", borderBottomStartRadius: 25, borderBottomEndRadius: 25, padding: "7%", display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "flex-start", gap: 10 }}>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-                <AntDesign name="arrowleft" color="#fff" size={20} />
-            </TouchableOpacity>
-            <View>
-                <Text style={{ color: "#fff", fontSize: 20, fontFamily: "OpenSans-Regular", textAlign: "center", maxWidth: "90%", marginHorizontal: "auto" }}>Select the orders you would like to deliver</Text>
-            </View>
-        </View>
-    )
-}
+
 
 
 const OrderTypeCard = ({ heading, secondaryHeading, orderTypePref, setOrderTypePref }) => {

@@ -1,13 +1,14 @@
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { useNavigation } from '@react-navigation/native'
+import Header from '../components/common/Header'
 
 const RegistrationComplete = () => {
     const navigation = useNavigation()
     return (
         <View style={styles.container}>
-            <Header />
-            <View style={{ backgroundColor: "#FA4A0C", padding: "5%", zIndex: 0, width: "100%", height: "25%", marginTop: "10%" }}>
+           <Header title={"Enter Personal Information"} showicon={true}/>
+            <View style={{ backgroundColor: "#FA4A0C", padding: "5%", zIndex: 0, width: "100%", height: "25%",  }}>
                 <View style={{
                     display: "flex",
                     flexDirection: "row",
@@ -64,7 +65,7 @@ const RegistrationComplete = () => {
                         <CompletedDoc title={"Work Details"} href={"work-details"} />
                     </View>
                 </View>
-                <TouchableOpacity onPress={() => navigation.navigate("onboarding")} style={{ marginVertical: "10%", backgroundColor: "#FA4A0C", borderRadius: 10, height: 50, display: "flex", justifyContent: "center", alignItems: "center", width: "80%", marginHorizontal: "auto" }}>
+                <TouchableOpacity onPress={() => navigation.navigate("vehicle-details")} style={{ marginVertical: "10%", backgroundColor: "#FA4A0C", borderRadius: 10, height: 50, display: "flex", justifyContent: "center", alignItems: "center", width: "80%", marginHorizontal: "auto" }}>
                     <Text style={{ color: "#fff", fontSize: 16, fontFamily: "OpenSans-Medium", textAlign: "center", }}>Continue</Text>
                 </TouchableOpacity>
             </ScrollView>
@@ -82,15 +83,7 @@ const styles = StyleSheet.create({
     }
 })
 
-const Header = () => {
-    return (
-        <View style={{ position: "absolute", top: 0, backgroundColor: "#202020", borderBottomStartRadius: 25, borderBottomEndRadius: 25, padding: "7%", display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "flex-start", gap: 10, zIndex: 1, width: "100%" }}>
-            <View style={{ marginHorizontal: "auto" }}>
-                <Text style={{ color: "#fff", fontSize: 20, fontFamily: "OpenSans-Regular", }}>Registration Complete</Text>
-            </View>
-        </View>
-    )
-}
+
 
 const CompletedDoc = ({ title }) => {
     return (

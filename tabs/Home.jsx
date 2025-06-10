@@ -1,15 +1,27 @@
-import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Dimensions, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import MapView, { Marker } from 'react-native-maps'
 const { height } = Dimensions.get("window")
 import IonIcons from 'react-native-vector-icons/Ionicons'
 import { useOrder } from '../context/OrderContext'
+import { useDispatch } from 'react-redux'
+import { setisAuthenticated } from '../redux/authSlice'
+import { useNavigation } from '@react-navigation/native'
 
 const Home = () => {
     const { isNewOrder } = useOrder()
+    const navigation = useNavigation()
+const dispatch = useDispatch()
+const handlelogout = () => {
+        // Handle logout logic here
+        console.log("Logout pressed");
+        dispatch(setisAuthenticated(false)); // Update the authentication state
+        navigation.navigate('landing'); // Navigate to the landing page
+    };
+
     return (
         <View style={styles.container}>
-            <Header />
+            <Header handlelogout={handlelogout}/>
             <MapView
                 style={{ flex: 1, zIndex: 0 }}
                 provider={'google'}
@@ -36,18 +48,22 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#fff",
-        position: "relative"
+        position: "relative",
+
     }
 })
 
-const Header = () => {
+const Header = ({handlelogout}) => {
+
+
+   
     const { placeOrder } = useOrder()
     const handleOrder = () => {
         const newOrder = { id: 1, details: "Order details here" }; // Example order
         placeOrder(newOrder); // Place the order
     };
     return (
-        <View style={{ position: "absolute", top: 0, width: "100%", backgroundColor: "#202020", borderBottomStartRadius: 20, borderBottomEndRadius: 20, zIndex: 1, height: height * 0.10, padding: "5%" }}>
+        <View style={{ position: "absolute", top: 0, width: "100%", backgroundColor: "#202020", borderBottomStartRadius: 20, borderBottomEndRadius: 20, zIndex: 1,  padding: "5%" ,paddingTop: Platform.OS === "ios" ? 50 : 0}}>
             <View style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
                 <View style={{ backgroundColor: "#fff", borderRadius: 10, display: "flex", alignItems: "flex-end", width: "20%", paddingVertical: 5, paddingHorizontal: 5 }}>
                     <TouchableOpacity style={{ backgroundColor: "#FA4A0C", height: height * 0.035, paddingHorizontal: 5, borderRadius: 10, justifyContent: "center", alignItems: "center" }}>
@@ -57,9 +73,9 @@ const Header = () => {
                 <TouchableOpacity onPress={handleOrder}>
                     <Text style={{ color: "#fff" }}>place  order</Text>
                 </TouchableOpacity>
-                <View>
+                <TouchableOpacity onPress={handlelogout}>
                     <IonIcons name="notifications-outline" color="#fff" size={25} />
-                </View>
+               </TouchableOpacity>
             </View>
         </View >
     )

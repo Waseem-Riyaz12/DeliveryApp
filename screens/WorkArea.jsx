@@ -4,12 +4,13 @@ import { useNavigation } from '@react-navigation/native'
 import RadioButton from 'react-native-radio-button'
 import { useState } from 'react'
 import Fa from 'react-native-vector-icons/FontAwesome'
+import Header from '../components/common/Header'
 const WorkArea = () => {
     const [areaPref, setAreaPref] = useState(null)
     const navigation = useNavigation()
     return (
         <View style={styles.container}>
-            <Header />
+            <Header title={"Select area you want to work in"} showicon={true}/>
             <View>
                 <Text
                     style={{
@@ -64,20 +65,7 @@ const styles = StyleSheet.create({
     }
 })
 
-const Header = () => {
-    const navigation = useNavigation()
-    return (
-        <View style={{ backgroundColor: "#202020", borderBottomStartRadius: 25, borderBottomEndRadius: 25, padding: "7%", display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "flex-start", gap: 10 }}>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-                <AntDesign name="arrowleft" color="#fff" size={20} />
-            </TouchableOpacity>
-            <View>
-                <Text style={{ color: "#fff", fontSize: 20, fontFamily: "OpenSans-Regular", textAlign: "center", maxWidth: "80%", marginHorizontal: "auto" }}>Select area you want
-                    to work in</Text>
-            </View>
-        </View>
-    )
-}
+
 
 
 const AreaPrefCard = ({ heading, secondaryHeading, areaPref, setAreaPref }) => {

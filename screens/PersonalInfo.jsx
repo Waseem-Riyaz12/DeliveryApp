@@ -4,15 +4,17 @@ import RadioButton from 'react-native-radio-button'
 import { useState } from 'react'
 import Entypo from 'react-native-vector-icons/Entypo'
 import { useNavigation } from '@react-navigation/native'
+import Header from '../components/common/Header'
 
 const PersonalInfo = () => {
+    const navigation = useNavigation()
     const [gender, setGender] = useState("male")
     const [inputs, setInputs] = useState({
         gender: "male"
     })
     return (
         <View style={styles.container}>
-            <Header />
+            <Header title={"Enter Personal Information"} showicon={true}/>
             <ScrollView style={{ flex: 1 }}>
                 <View>
                     <Input label={"First Name"} placeholder={"First Name"} />
@@ -20,7 +22,9 @@ const PersonalInfo = () => {
                 </View>
                 <RadioInputs gender={gender} setGender={setGender} />
                 <UploadPic />
-                <TouchableOpacity style={{ marginTop: "10%", width: "90%", height: 64, marginHorizontal: "auto", backgroundColor: "#FA4A0C", padding: 10, borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <TouchableOpacity 
+                onPress={()=>navigation.navigate("personal-docs")}
+                style={{ marginTop: "10%", width: "90%", height: 64, marginHorizontal: "auto", backgroundColor: "#FA4A0C", padding: 10, borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center" }}>
                     <Text style={{ color: "#fff", fontSize: 24, fontFamily: "OpenSans-Regular" }}>Continue</Text>
                 </TouchableOpacity>
 
@@ -37,19 +41,19 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff"
     }
 })
-const Header = () => {
-    const navigation = useNavigation()
-    return (
-        <View style={{ backgroundColor: "#202020", borderBottomStartRadius: 25, borderBottomEndRadius: 25, padding: "7%", display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "flex-start", gap: 10 }}>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-                <AntDesign name="arrowleft" color="#fff" size={20} />
-            </TouchableOpacity>
-            <View>
-                <Text style={{ color: "#fff", fontSize: 20, fontFamily: "OpenSans-Regular", textAlign: "center" }}>Enter Personal Information</Text>
-            </View>
-        </View>
-    )
-}
+// const Header = () => {
+//     const navigation = useNavigation()
+//     return (
+//         <View style={{ backgroundColor: "#202020", borderBottomStartRadius: 25, borderBottomEndRadius: 25, padding: "7%", display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "flex-start", gap: 10 ,paddingTop: Platform.OS === "ios" ? 50 : 20,}}>
+//             <TouchableOpacity onPress={() => navigation.goBack()}>
+//                 <AntDesign name="arrowleft" color="#fff" size={20} />
+//             </TouchableOpacity>
+//             <View>
+//                 <Text style={{ color: "#fff", fontSize: 20, fontFamily: "OpenSans-Regular", textAlign: "center" }}>Enter Personal Information</Text>
+//             </View>
+//         </View>
+//     )
+// }
 
 const Input = ({ placeholder, label }) => {
     return (

@@ -3,13 +3,14 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
 import { useNavigation } from '@react-navigation/native'
 import RadioButton from 'react-native-radio-button'
 import { useState } from 'react'
+import Header from '../components/common/Header'
 
 const PreferredTimings = () => {
     const [workPref, setWorkPref] = useState(null)
     const navigation = useNavigation()
     return (
         <View style={styles.container}>
-            <Header />
+            <Header title={"Select your preferred work Timings"} showicon={true}/>
             <View>
                 <Text
                     style={{
@@ -63,19 +64,7 @@ const styles = StyleSheet.create({
     }
 })
 
-const Header = () => {
-    const navigation = useNavigation()
-    return (
-        <View style={{ backgroundColor: "#202020", borderBottomStartRadius: 25, borderBottomEndRadius: 25, padding: "7%", display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "flex-start", gap: 10 }}>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-                <AntDesign name="arrowleft" color="#fff" size={20} />
-            </TouchableOpacity>
-            <View>
-                <Text style={{ color: "#fff", fontSize: 20, fontFamily: "OpenSans-Regular", textAlign: "center", maxWidth: "80%", marginHorizontal: "auto" }}>Select Your Preferred Work Timings</Text>
-            </View>
-        </View>
-    )
-}
+
 
 
 const TimingCard = ({ heading, secondaryHeading, workPref, setWorkPref }) => {

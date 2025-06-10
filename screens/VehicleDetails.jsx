@@ -2,17 +2,21 @@ import { Keyboard, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text,
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import { useNavigation } from '@react-navigation/native'
 import Entypo from 'react-native-vector-icons/Entypo'
+import Header from '../components/common/Header'
 
 const VehicleDetails = () => {
+    const navigation = useNavigation()
     return (
         <View style={styles.container}>
-            <Header />
+            <Header title={"Enter Vehicle Information"} showicon={true}/>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <Input label={"Vehicle Number"} placeholder={"Enter Vehicle Number"} />
                 <Input label={"Registration Number"} placeholder={"Enter Vehicle Registration Number"} />
                 <VehicleUpload />
             </ScrollView>
-            <TouchableOpacity style={{ marginVertical: "10%", backgroundColor: "#FA4A0C", borderRadius: 10, height: 50, display: "flex", justifyContent: "center", alignItems: "center", width: "80%", marginHorizontal: "auto" }}>
+            <TouchableOpacity
+            onPress={() => navigation.navigate("bank-account-details")}
+            style={{ marginVertical: "10%", backgroundColor: "#FA4A0C", borderRadius: 10, height: 50, display: "flex", justifyContent: "center", alignItems: "center", width: "80%", marginHorizontal: "auto" }}>
                 <Text style={{ color: "#fff", fontSize: 16, fontFamily: "OpenSans-Medium", textAlign: "center", }}>Submit</Text>
             </TouchableOpacity>
         </View>
@@ -28,19 +32,7 @@ const styles = StyleSheet.create({
     }
 })
 
-const Header = () => {
-    const navigation = useNavigation()
-    return (
-        <View style={{ backgroundColor: "#202020", borderBottomStartRadius: 25, borderBottomEndRadius: 25, padding: "7%", display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "flex-start", gap: 10 }}>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-                <AntDesign name="arrowleft" color="#fff" size={20} />
-            </TouchableOpacity>
-            <View>
-                <Text style={{ color: "#fff", fontSize: 20, fontFamily: "OpenSans-Regular", textAlign: "center" }}>Enter Vehicle Information</Text>
-            </View>
-        </View>
-    )
-}
+
 
 const Input = ({ placeholder, label }) => {
     return (

@@ -5,13 +5,18 @@ import Entypo from 'react-native-vector-icons/Entypo'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { useState } from 'react'
 import ReactNativeModal from 'react-native-modal'
+import Header from '../components/common/Header'
 
 const UploadDrivingLicense = () => {
     const [isOpen, setIsOpen] = useState(false)
     const navigation = useNavigation()
+    const handleSubmit = () => {
+        setIsOpen(false)
+       navigation.navigate("registration-complete")
+    }
     return (
         <View style={styles.container}>
-            <Header />
+            <Header showicon={true} title={'Upload Driving License'}/>
             <ScrollView style={{ marginBottom: 10 }}>
                 <View style={{ padding: "5%", borderStyle: "dashed", borderBottomColor: "#D6D6D6", borderBottomWidth: 1, }}>
                     <Text
@@ -54,7 +59,7 @@ const UploadDrivingLicense = () => {
                             will review the uploaded documents and
                             revert back to you soon!
                         </Text>
-                        <TouchableOpacity onPress={() => navigation.navigate("registration-complete")} style={{ marginVertical: "15%", backgroundColor: "#FA4A0C", borderRadius: 10, height: 50, display: "flex", justifyContent: "center", alignItems: "center", width: "50%", marginHorizontal: "auto" }}>
+                        <TouchableOpacity onPress={handleSubmit} style={{ marginVertical: "15%", backgroundColor: "#FA4A0C", borderRadius: 10, height: 50, display: "flex", justifyContent: "center", alignItems: "center", width: "50%", marginHorizontal: "auto" }}>
                             <Text style={{ color: "#fff", fontSize: 16, fontFamily: "OpenSans-Medium", textAlign: "center", }}>Submit</Text>
                         </TouchableOpacity>
                     </View>
@@ -73,19 +78,7 @@ const styles = StyleSheet.create({
     }
 })
 
-const Header = () => {
-    const navigation = useNavigation()
-    return (
-        <View style={{ backgroundColor: "#202020", borderBottomStartRadius: 25, borderBottomEndRadius: 25, padding: "7%", display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "flex-start", gap: 10 }}>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-                <AntDesign name="arrowleft" color="#fff" size={20} />
-            </TouchableOpacity>
-            <View >
-                <Text style={{ color: "#fff", fontSize: 20, fontFamily: "OpenSans-Regular", textAlign: "center" }}>Upload Personal Documents</Text>
-            </View>
-        </View>
-    )
-}
+
 
 const LicenseUpload = () => {
     return (

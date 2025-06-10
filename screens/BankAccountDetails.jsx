@@ -1,18 +1,22 @@
 import { Keyboard, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import { useNavigation } from '@react-navigation/native'
+import Header from '../components/common/Header'
 
 const BankAccountDetails = () => {
+    const navigation = useNavigation()
     return (
         <View style={styles.container}>
-            <Header />
+            <Header title={"Enter Bank Information"} showicon={true}/>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <Input label={"Account Number"} placeholder={"16 digit Bank Account Number"} />
                 <Input label={"Re-Enter Account Number"} placeholder={"Re-enter 16 digit Bank Account Number"} />
                 <Input label={"Bank Name"} placeholder={"Bank Name"} />
                 <Input label={"IFSC Code"} placeholder={"IFSC Code"} />
             </ScrollView>
-            <TouchableOpacity style={{ marginVertical: "15%", backgroundColor: "#FA4A0C", borderRadius: 10, height: 50, display: "flex", justifyContent: "center", alignItems: "center", width: "80%", marginHorizontal: "auto" }}>
+            <TouchableOpacity 
+            onPress={() => navigation.navigate("work-details")}
+            style={{ marginVertical: "15%", backgroundColor: "#FA4A0C", borderRadius: 10, height: 50, display: "flex", justifyContent: "center", alignItems: "center", width: "80%", marginHorizontal: "auto" }}>
                 <Text style={{ color: "#fff", fontSize: 16, fontFamily: "OpenSans-Medium", textAlign: "center", }}>Submit</Text>
             </TouchableOpacity>
         </View>
@@ -28,19 +32,7 @@ const styles = StyleSheet.create({
     }
 })
 
-const Header = () => {
-    const navigation = useNavigation()
-    return (
-        <View style={{ backgroundColor: "#202020", borderBottomStartRadius: 25, borderBottomEndRadius: 25, padding: "7%", display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "flex-start", gap: 10 }}>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-                <AntDesign name="arrowleft" color="#fff" size={20} />
-            </TouchableOpacity>
-            <View>
-                <Text style={{ color: "#fff", fontSize: 20, fontFamily: "OpenSans-Regular", textAlign: "center" }}>Enter Bank Information</Text>
-            </View>
-        </View>
-    )
-}
+
 
 const Input = ({ placeholder, label }) => {
     return (

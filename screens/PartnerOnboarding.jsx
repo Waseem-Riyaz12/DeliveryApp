@@ -1,13 +1,15 @@
 import { useNavigation } from '@react-navigation/native'
-import { Dimensions, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Dimensions, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import EvilIcons from 'react-native-vector-icons/EvilIcons'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import Header from '../components/common/Header'
 const { height } = Dimensions.get("window")
 
 const PartnerOnboarding = () => {
+    const navigation = useNavigation()
     return (
         <View style={styles.container}>
-            <Header />
+            <Header title={'Welcome to Food Kart '} subtitle={'Just a few more steps will help you finish creating your profile and begin making money.'}/>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={{ paddingHorizontal: 10, paddingVertical: 20 }}>
                     <View>
@@ -29,7 +31,9 @@ const PartnerOnboarding = () => {
                         <CompletedDoc title={"Bank Account Details"} />
                     </View>
                 </View>
-                <TouchableOpacity style={{ backgroundColor: "#FA4A0C", padding: 10, borderRadius: 10, marginBottom: 20, minHeight: 50, display: "flex", justifyContent: "center", alignItems: "center", marginHorizontal: 40 }}>
+                <TouchableOpacity 
+                onPress={()=>navigation.navigate("personal-info")}
+                style={{ backgroundColor: "#FA4A0C", padding: 10, borderRadius: 10, marginBottom: 20, minHeight: 50, display: "flex", justifyContent: "center", alignItems: "center", marginHorizontal: 40 }}>
                     <Text style={{ color: "white", fontFamily: "OpenSans-Bold", fontSize: 16, textAlign: "center" }}>Continue</Text>
                 </TouchableOpacity>
             </ScrollView>
@@ -46,19 +50,20 @@ const styles = StyleSheet.create({
     }
 })
 
-const Header = () => {
-    return (
-        <View style={{ width: "100%", backgroundColor: "#202020", elevation: 5, borderBottomStartRadius: 25, borderBottomEndRadius: 25, padding: "7%" }}>
-            <View>
-                <Text style={{ color: "white", fontSize: 20, fontFamily: "OpenSans-Bold", textAlign: "center" }}>Welcome to Food kart</Text>
-            </View>
-            <View style={{ marginTop: "7%", maxWidth: "80%", marginHorizontal: "auto" }}>
-                <Text style={{ color: "white", fontSize: 12, fontFamily: "OpenSans-Regular", textAlign: "center" }}>Just a few more steps will help you finish creating
-                    your profile and begin making money.</Text>
-            </View>
-        </View>
-    )
-}
+// const Header = () => {
+//     return (
+//         <View style={{ width: "100%", backgroundColor: "#202020", elevation: 5, borderBottomStartRadius: 25, borderBottomEndRadius: 25, padding: "7%" ,  paddingTop: Platform.OS === "ios" ? 50 : 20, 
+// }}>
+//             <View>
+//                 <Text style={{ color: "white", fontSize: 20, fontFamily: "OpenSans-Bold", textAlign: "center" }}>Welcome to Food kart</Text>
+//             </View>
+//             <View style={{ marginTop: "7%", maxWidth: "80%", marginHorizontal: "auto" }}>
+//                 <Text style={{ color: "white", fontSize: 12, fontFamily: "OpenSans-Regular", textAlign: "center" }}>Just a few more steps will help you finish creating
+//                     your profile and begin making money.</Text>
+//             </View>
+//         </View>
+//     )
+// }
 
 const PendingDoc = ({ title, href }) => {
     const navigation = useNavigation()
